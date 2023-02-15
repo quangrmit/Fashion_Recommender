@@ -1,3 +1,7 @@
+<script>
+    import Generator from "./Generator.svelte";
+</script>
+
 <nav>
     <div class="brand">What</div>
     <ul>

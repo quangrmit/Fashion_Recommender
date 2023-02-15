@@ -4,6 +4,7 @@
     import rectangle2 from "./assets/Rectangle 2.png";
     import rectangle3 from "./assets/Rectangle 3.png";
     import Navbar from "./lib/Navbar.svelte";
+    import { Router, Route, Link } from "svelte-navigator";
 </script>
 
 <main>
