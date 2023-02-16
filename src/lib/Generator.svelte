@@ -1,6 +1,7 @@
 <script>
     import Navbar from "./Navbar.svelte";
     let imageData;
+    let male,female,casual,formal = false;
     // let link = "https://190a-34-83-63-151.ngrok.io/image";
     let link = "https://dog.ceo/api/breeds/image/random";
 
@@ -14,7 +15,29 @@
         const response = await fetch(link);
         console.log(response);
         imageData = await response.json();
-    };
+
+    }
+
+    function chooseMale() {
+      male = true;
+      female = false;
+    }
+
+    function chooseFemale() {
+      female = true;
+      male = false;
+    }
+
+    function chooseCasual() {
+      casual = true;
+      formal = false;
+    }
+
+    function chooseFormal() {
+      formal = true;
+      casual = false;
+    }
+
 </script>
 
 <div class="body">
@@ -56,13 +79,13 @@
                 <p>YOUR <br />GENDER</p>
 
                 <div class="button-container">
-                    <label class="container"
-                        >MALE
+                    <label class="container  {male ? "active" :" " }" on:click={chooseMale}
+                        > MALE
                         <input type="radio" checked={true} name="radio" />
                         <span class="checkmark" />
                     </label>
 
-                    <label class="container"
+                    <label class="container {female ? "active" :" " }" on:click={chooseFemale}
                         >FEMALE
                         <input type="radio" name="radio" />
                         <span class="checkmark" />
@@ -74,13 +97,13 @@
                 <p>YOUR <br />STYLE</p>
 
                 <div class="button-container">
-                    <label class="container"
+                    <label class="container {casual ? "active" :" " }" on:click={chooseCasual}
                         >CASUAL
                         <input type="radio" checked={true} name="radio" />
                         <span class="checkmark" />
                     </label>
 
-                    <label class="container"
+                    <label class="container {formal ? "active" :" " }" on:click={chooseFormal}
                         >FORMAL
                         <input type="radio" name="radio" />
                         <span class="checkmark" />
@@ -93,9 +116,9 @@
                 <textarea name="more" rows="8" cols="80" />
             </div>
 
-            <button class="generate" on:click={fetchImage}>
+            <div class="generate" on:click={fetchImage}>
                 <p>GENERATE</p>
-            </button>
+            </div>
         </div>
     </div>
 </div>
@@ -117,7 +140,7 @@
     }
     .grid-container {
         display: grid;
-        grid-template-columns: 70vw 30vw;
+        grid-template-columns: 75vw 25vw;
         grid-template-rows: auto;
         width: 100vw;
         height: 100vh;
@@ -143,8 +166,8 @@
         border-radius: 10px;
         text-decoration: none;
         color: white;
-        padding: 10px 20px;
-        width: 230px;
+        padding: 2vw;
+        width: 18vw;
         font-size: 25px;
         border-radius: 30;
         margin: 30px;
@@ -152,7 +175,7 @@
     }
 
     .placeholder img {
-        width: 30vw;
+        width: 28vw;
     }
 
     .placeholder {
@@ -180,6 +203,7 @@
         border: 2px solid black;
         border-radius: 10px;
         width: 100%;
+        height: 15vw;
     }
 
     .right .title {
@@ -190,19 +214,29 @@
     }
 
     .container {
-        width: 100px;
+        overflow: hidden;
+        width: 15vw;
         border: 2px solid black;
         cursor: pointer;
-        margin: 10px 20px;
+        margin: 1vw 2vw;
         border-radius: 10px;
-        padding: 15px 40px;
+        padding: 15px;
         text-align: center;
     }
+
+    .container label {
+  width: 6vw;
+}
 
     .button-container {
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    .button-container .active {
+    background-color: black;
+    color: white;
     }
 
     .container input {
@@ -212,14 +246,16 @@
     }
 
     .generate p {
-        width: 100px;
-        border: 2px solid black;
-        cursor: pointer;
-        margin: 10px 20px;
-        border-radius: 10px;
-        padding: 15px 40px;
         text-align: center;
         background-color: #4cf2b0;
+        overflow: hidden;
+        width: 12vw;
+        border: 2px solid black;
+        cursor: pointer;
+        margin: 1vw 2vw;
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
     }
 
     .right .generate {
