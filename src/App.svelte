@@ -4,7 +4,7 @@
     import rectangle2 from "./assets/Rectangle 2.png";
     import rectangle3 from "./assets/Rectangle 3.png";
     import Navbar from "./lib/Navbar.svelte";
-    import { Router, Route, Link } from "svelte-navigator";
+
 </script>
 
 <main>
@@ -16,7 +16,7 @@
         <Navbar />
         <div class="intro">
             <div class="title">AI Fashion Recommendation</div>
-            <div>
+            <div class ="des">
                 Our website offers personalized style advice based on the latest trends using AI. featuring
                 top fashion brands and Focused on hottest fashion trends.
             </div>
@@ -78,5 +78,13 @@
         color: white;
         border: none;
         height: 5vh;
+    }
+    .title {
+    margin-bottom: 1vh;
+    }
+
+    .des {
+    margin-bottom: 2vh;
+    cursor: pointer;
     }
 </style>
