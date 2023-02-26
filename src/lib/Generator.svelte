@@ -2,6 +2,7 @@
     import Navbar from "./Navbar.svelte";
     let imageData;
     let male,female,casual,formal = false;
+    let loading = false;
     // let link = "https://190a-34-83-63-151.ngrok.io/image";
     let link = "https://dog.ceo/api/breeds/image/random";
 
@@ -12,9 +13,11 @@
     //     return await response.json();
     // })();
     const fetchImage = async () => {
+        loading = true;
         const response = await fetch(link);
         console.log(response);
         imageData = await response.json();
+        loading = false;
 
     }
 
@@ -55,6 +58,25 @@
             </div>
 
             <div class="placeholder">
+
+                {#if loading}
+
+<section class="loader">
+
+  <div style="--i:0" class="slider">
+  </div>
+  <div style="--i:1" class="slider">
+  </div>
+  <div style="--i:2" class="slider">
+  </div>
+  <div style="--i:3" class="slider">
+  </div>
+  <div style="--i:4" class="slider">
+  </div>
+</section>
+
+                {/if}
+
                 {#if imageData == null}
                     <img src="src\assets\placeholder.png" alt="" />
                 {:else}
@@ -263,4 +285,60 @@
         justify-content: center;
         align-items: center;
     }
+
+    .loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  position: absolute;
+}
+
+.slider {
+  overflow: hidden;
+  background-color: white;
+  margin: 0 0.5vw;
+  height: 3.5vw;
+  width: 1vw;
+  border-radius: 30px;
+  border-radius: 30px;
+    box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.1), -15px -15px 30px #fff,
+      inset -5px -5px 10px rgba(0, 0, 255, 0.1),
+      inset 5px 5px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+  box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.3), 0px 420px 0 400px #2697f3,
+    inset 0px 0px 0px rgba(0, 0, 0, 0.1);
+  animation: animate_2 2.5s ease-in-out infinite;
+  animation-delay: calc(-0.5s * var(--i));
+}
+
+@keyframes animate_2 {
+  0% {
+    transform: translateY(250px);
+    filter: hue-rotate(100deg);
+  }
+
+  50% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(250px);
+    filter: hue-rotate(180deg);
+  }
+}
+
+.blur {
+filter: blur(4px);
+}
 </style>

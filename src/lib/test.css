@@ -1,0 +1,10 @@
+.team-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  place-items: center;
+}
+
+.ava {
+  width: 25vw;
+  font-weight: bold;
+}

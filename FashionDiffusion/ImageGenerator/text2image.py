@@ -3,10 +3,11 @@ import firebase_admin
 from firebase_admin import credentials, storage
 from diffusers import DiffusionPipeline
 from diffusers import EulerAncestralDiscreteScheduler
-import sys, datetime, uuid4
+import sys, datetime
+from uuid import uuid4
 
 # set up firebase credentials, put the firebase admin sdk in the same directory as this python file
-cred = credentials.Certificate("/greenieverse-firebase-adminsdk-e3b5a-f38879b828.json")
+cred = credentials.Certificate("greenieverse-firebase-adminsdk-e3b5a-f38879b828.json")
 firebase_admin.initialize_app(cred, {
     'storageBucket': 'greenieverse.appspot.com'
 })

@@ -4,6 +4,15 @@
     import rectangle2 from "./assets/Rectangle 2.png";
     import rectangle3 from "./assets/Rectangle 3.png";
     import Navbar from "./lib/Navbar.svelte";
+    import { fly } from 'svelte/transition';
+    import { onMount } from 'svelte';
+
+    let flyIn = false;
+
+    onMount(() => {
+    flyIn = true;
+    });
+
 
 </script>
 
@@ -12,9 +21,12 @@
         <img class="partial-background background1" src={rectangle1} alt="" />
         <img class="partial-background background2" src={rectangle2} alt="" />
         <img class="partial-background background3" src={rectangle3} alt="" />
-        <img class="woman" src={womanImage} alt="" />
+        {#if flyIn}
+        <img transition:fly="{{y: 150, duration: 1500 }}" class="woman" src={womanImage} alt="" />
+        {/if}
         <Navbar />
-        <div class="intro">
+        {#if flyIn}
+        <div class="intro" transition:fly="{{ y: 150, duration: 2500 }}">
             <div class="title">AI Fashion Recommendation</div>
             <div class ="des">
                 Our website offers personalized style advice based on the latest trends using AI. featuring
@@ -22,6 +34,7 @@
             </div>
             <button>Get started</button>
         </div>
+        {/if}
     </div>
 </main>
 

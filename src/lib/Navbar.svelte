@@ -29,6 +29,7 @@
         justify-content: space-between;
         align-items: flex-start;
         z-index: 3;
+
     }
     nav > ul {
         display: flex;
