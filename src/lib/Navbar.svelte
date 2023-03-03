@@ -9,7 +9,7 @@
         <li><a href="#">About</a></li>
         <li><a href="#">Team</a></li>
     </ul>
-    <button>Open</button>
+    <button class="open-btn">Open</button>
 </nav>
 
 <style>

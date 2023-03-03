@@ -1,7 +1,35 @@
 <script>
     import Navbar from "./Navbar.svelte";
+    import axios from "axios";
+    import MainApp from "../MainApp.svelte";
+
+    let styles = [
+        "Parisian style",
+        "Athleisure style",
+        "Classic style",
+        "Lolita style",
+        "Streetwear style",
+        "Business Casual style",
+        "Vintage style",
+        "Chic style",
+        "bohemian chic style",
+        "Preppy style",
+        "Punk style",
+        "Punk style",
+        "Tomboy style",
+        "Gothic style",
+        "Rocker style",
+        "Ethnic style",
+        "Girly style",
+        "Kawaii style",
+    ];
+    let prompt = "";
+    let moreDetails = "";
     let imageData;
-    let male,female,casual,formal = false;
+    let male = false;
+    let female = false;
+    let casual = false;
+    let formal = false;
     // let link = "https://190a-34-83-63-151.ngrok.io/image";
     let link = "https://dog.ceo/api/breeds/image/random";
 
@@ -11,33 +39,80 @@
 
     //     return await response.json();
     // })();
-    const fetchImage = async () => {
-        const response = await fetch(link);
-        console.log(response);
-        imageData = await response.json();
+    const fetchImage = async (prompt) => {
+        console.log(prompt);
+        // const response = await axios.get(prompt);
 
-    }
+        // console.log(response);
+        // imageData = response.data;
+    };
+
+    // const fetchImage = async () => {
+    //     const response = await fetch(link);
+    //     console.log(response);
+    //     imageData = await response.json();
+    // };
 
     function chooseMale() {
-      male = true;
-      female = false;
+        male = true;
+        female = false;
     }
 
     function chooseFemale() {
-      female = true;
-      male = false;
+        female = true;
+        male = false;
     }
 
     function chooseCasual() {
-      casual = true;
-      formal = false;
+        casual = true;
+        formal = false;
     }
 
     function chooseFormal() {
-      formal = true;
-      casual = false;
+        formal = true;
+        casual = false;
     }
+    // full body of a male model wearing a winter outfit with parisian style
+    /**
+     * @param {boolean} [season]
+     * @param {boolean} [trending]
+     */
+    function generatePrompt(season, trending) {
+        let seasonString = "";
+        let trendingString = "";
+        let gender = "";
+        console.log(formal);
+        if (male == false && female == false) {
+            gender = ["male", "female"][Math.floor(Math.random() * 2)];
+        } else {
+            male == true ? (gender = "male") : (gender = "female");
+        }
 
+        let style = "";
+        if (casual == false && formal == false) {
+            style = ["casual", "formal"][Math.floor(Math.random() * 2)];
+        } else {
+            casual == true ? (style = "casual") : (style = "formal");
+        }
+
+        if (season) {
+            let month = new Date().getMonth();
+            if (month == 0 || month == 1 || month == 2) seasonString = "spring";
+            if (month == 3 || month == 4 || month == 5) seasonString = "summer";
+            if (month == 6 || month == 7 || month == 8) seasonString = "autumn";
+            if (month == 9 || month == 10 || month == 11) seasonString = "winter";
+        }
+        if (trending) {
+            trendingString = "with " + styles[Math.floor(Math.random() * styles.length)];
+        }
+
+        let prompt = `full body of a ${gender} model wearing a ${style} ${seasonString} outfit ${trendingString}`;
+
+        console.log(prompt);
+        moreDetails = "";
+
+        return prompt;
+    }
 </script>
 
 <div class="body">
@@ -45,11 +120,21 @@
     <div class="grid-container">
         <div class="left">
             <div class="style">
-                <div class="button">
+                <div
+                    class="button"
+                    on:click={() => {
+                        fetchImage(generatePrompt(false, true));
+                    }}
+                >
                     <p>🔥 TRENDING FIT</p>
                 </div>
 
-                <div class="button">
+                <div
+                    class="button"
+                    on:click={() => {
+                        fetchImage(generatePrompt(true, false));
+                    }}
+                >
                     <p>❄️ SEASON FIT</p>
                 </div>
             </div>
@@ -71,21 +156,20 @@
         </div>
 
         <div class="right">
-            <div class="title">
-                <h1>CUSTOMIZE</h1>
-            </div>
+            <div class="title">CUSTOMIZE</div>
 
             <div class="yourgender wrapper">
                 <p>YOUR <br />GENDER</p>
 
                 <div class="button-container">
-                    <label class="container  {male ? "active" :" " }" on:click={chooseMale}
-                        > MALE
-                        <input type="radio" checked={true} name="radio" />
+                    <label class="container  {male ? 'active' : ' '}" on:click={chooseMale}>
+                        MALE
+                        <!-- <input type="radio" checked={true} name="radio" /> -->
+                        <input type="radio" name="radio" />
                         <span class="checkmark" />
                     </label>
 
-                    <label class="container {female ? "active" :" " }" on:click={chooseFemale}
+                    <label class="container {female ? 'active' : ' '}" on:click={chooseFemale}
                         >FEMALE
                         <input type="radio" name="radio" />
                         <span class="checkmark" />
@@ -97,13 +181,13 @@
                 <p>YOUR <br />STYLE</p>
 
                 <div class="button-container">
-                    <label class="container {casual ? "active" :" " }" on:click={chooseCasual}
+                    <label class="container {casual ? 'active' : ' '}" on:click={chooseCasual}
                         >CASUAL
                         <input type="radio" checked={true} name="radio" />
                         <span class="checkmark" />
                     </label>
 
-                    <label class="container {formal ? "active" :" " }" on:click={chooseFormal}
+                    <label class="container {formal ? 'active' : ' '}" on:click={chooseFormal}
                         >FORMAL
                         <input type="radio" name="radio" />
                         <span class="checkmark" />
@@ -113,10 +197,15 @@
 
             <div class="des wrapper">
                 <p>TELL US MORE</p>
-                <textarea name="more" rows="8" cols="80" />
+                <textarea name="more" rows="8" cols="80" bind:value={moreDetails} />
             </div>
 
-            <div class="generate" on:click={fetchImage}>
+            <div
+                class="generate"
+                on:click={() => {
+                    fetchImage(generatePrompt(false, false));
+                }}
+            >
                 <p>GENERATE</p>
             </div>
         </div>
@@ -139,11 +228,15 @@
         height: 100vh;
     }
     .grid-container {
+        z-index: 5;
         display: grid;
         grid-template-columns: 75vw 25vw;
         grid-template-rows: auto;
         width: 100vw;
         height: 100vh;
+    }
+    .button:hover {
+        cursor: pointer;
     }
 
     .left {
@@ -158,6 +251,11 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
+    }
+    img {
+        margin-top: 8vh;
+        width: 30vw;
+        height: 80vh;
     }
 
     .style .button {
@@ -185,17 +283,19 @@
     }
 
     .right {
+        padding: 0 1vw;
         height: 100vh;
         background-color: white;
+        z-index: 5;
         border: 2px solid black;
     }
 
-    .wrapper {
+    /* .wrapper {
         margin: 30px;
-    }
+    } */
 
     .wrapper p {
-        font-size: 24px;
+        font-size: 1rem;
         font-weight: 500;
     }
 
@@ -204,6 +304,10 @@
         border-radius: 10px;
         width: 100%;
         height: 15vw;
+    }
+
+    .title {
+        font-size: 1.5rem;
     }
 
     .right .title {
@@ -220,23 +324,26 @@
         cursor: pointer;
         margin: 1vw 2vw;
         border-radius: 10px;
-        padding: 15px;
+        padding: 1em;
         text-align: center;
     }
 
     .container label {
-  width: 6vw;
-}
+        width: 6vw;
+    }
 
     .button-container {
         display: flex;
         justify-content: center;
         align-items: center;
     }
+    .button-container > * {
+        text-align: center;
+    }
 
     .button-container .active {
-    background-color: black;
-    color: white;
+        background-color: black;
+        color: white;
     }
 
     .container input {
@@ -254,7 +361,7 @@
         cursor: pointer;
         margin: 1vw 2vw;
         border-radius: 10px;
-        padding: 15px;
+        /* padding: 15px; */
         text-align: center;
     }
 
