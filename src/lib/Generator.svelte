@@ -32,7 +32,7 @@
     let formal = false;
     let loading = false;
     // let link = "https://190a-34-83-63-151.ngrok.io/image";
-    let link = "https://dog.ceo/api/breeds/image/random";
+    let link = "http://8e41-35-231-173-98.ngrok.io/image?prompt=";
 
     // const fetchImage = (async () => {
     //     const response = await fetch(link);
@@ -40,13 +40,19 @@
 
     //     return await response.json();
     // })();
+    let config = {
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "ngrok-skip-browser-warning": "*",
+        },
+    };
     const fetchImage = async (prompt) => {
         loading = true;
         console.log(prompt);
-        // const response = await axios.get(prompt);
+        const response = await axios.get(link + prompt, config);
 
-        // console.log(response);
-        // imageData = response.data;
+        console.log(response);
+        imageData = response.data;
         loading = false;
     };
 
