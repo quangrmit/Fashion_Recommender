@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/image', async (req, res) => {
+    console.log(req.query.prompt);
     if (!req.query.prompt) {
         res.send(defaultImage)
         return;
