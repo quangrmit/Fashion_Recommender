@@ -8,3 +8,12 @@
   width: 25vw;
   font-weight: bold;
 }
+
+.support {
+width: 20vw;
+height: 40vh;
+background-color: #eb646;
+align-items: center;
+justify-content: center;
+text-transform: uppercase;
+}

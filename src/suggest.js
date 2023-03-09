@@ -5,4 +5,5 @@ const suggest = new Suggest({
     target: document.getElementById("suggest"),
 });
 
+
 export default suggest;
