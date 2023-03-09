@@ -25,7 +25,7 @@ answer=" ";
   }, {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer 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'
+      'Authorization': 'Bearer API'
     }
   });
   console.log(response.data.choices[0].text);
