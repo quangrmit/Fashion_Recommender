@@ -132,14 +132,14 @@
                 <textarea name="more" rows="3" cols="80" />
             </div>
 
-            <div
+            <!-- <div
                 class="generate"
                 on:click={() => {
                     fetchImage(generatePrompt(false, false));
                 }}
             >
                 <p>GENERATE</p>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
