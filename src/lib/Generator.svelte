@@ -32,7 +32,7 @@
     let formal = false;
     let loading = false;
     // let link = "https://190a-34-83-63-151.ngrok.io/image";
-    let link = "http://8e41-35-231-173-98.ngrok.io/image?prompt=";
+    let link = "http://b018-35-231-173-98.ngrok.io/image?prompt=";
 
     // const fetchImage = (async () => {
     //     const response = await fetch(link);
