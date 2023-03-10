@@ -40,19 +40,13 @@
 
     //     return await response.json();
     // })();
-    let config = {
-        headers: {
-            "Access-Control-Allow-Origin": "*",
-            "ngrok-skip-browser-warning": "*",
-        },
-    };
     const fetchImage = async (prompt) => {
         loading = true;
         console.log(prompt);
-        const response = await axios.get(link + prompt, config);
+        // const response = await axios.get(prompt);
 
-        console.log(response);
-        imageData = response.data;
+        // console.log(response);
+        // imageData = response.data;
         loading = false;
     };
 

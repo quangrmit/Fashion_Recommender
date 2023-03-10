@@ -25,7 +25,9 @@
         <Navbar />
         {#if flyIn}
             <div class="intro" transition:fly={{ y: 150, duration: 2500 }}>
-                <div class="title">AI Fashion Recommendation</div>
+                <div class="title">AI Fashion
+                 <span class="magic"><span class="magic-text">Recommendation</span></span>
+  </div>
                 <div class="des">
                     Our website offers personalized style advice based on the latest trends using AI.
                     featuring top fashion brands and Focused on hottest fashion trends.
@@ -37,6 +39,41 @@
 </main>
 
 <style>
+:root {
+  --purple: rgb(123, 31, 162);
+  --violet: rgb(103, 58, 183);
+  --pink: rgb(244, 143, 177);
+}
+
+@keyframes background-pan {
+  from {
+    background-position: 0% center;
+  }
+
+  to {
+    background-position: -200% center;
+  }
+}
+
+@keyframes scale {
+  from, to {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(180deg);
+  }
+}
     * {
         margin: 0;
         padding: 0;
@@ -81,7 +118,7 @@
         text-transform: uppercase;
     }
     .intro .title {
-        font-size: xx-large;
+        font-size: 2.5vw;
     }
     .intro button {
         width: 27vw;
@@ -91,8 +128,27 @@
         height: 5vh;
     }
     .title {
-        margin-bottom: 1vh;
+        margin-bottom: 1.5vh;
     }
+
+.magic {
+display: inline-block;
+}
+
+.magic > .magic-text {
+  animation: background-pan 3s linear infinite;
+  background: linear-gradient(
+    to right,
+    var(--purple),
+    var(--violet),
+    var(--pink),
+    var(--purple)
+  );
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+}
 
     .des {
         margin-bottom: 2vh;
