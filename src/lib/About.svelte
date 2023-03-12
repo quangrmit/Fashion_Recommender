@@ -17,11 +17,15 @@
 main {
     background-color: black;
     height: 100vh;
+    overflow: hidden;
 }
 
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  position:absolute;
+  z-index: 3;
+  width: 100vw;
 
 
 }
@@ -58,12 +62,52 @@ text-transform: uppercase;
 font-size: 24px;
 }
 
+
+
+@keyframes rotate {
+  from {
+    rotate: 0deg;
+  }
+
+  50% {
+    scale: 1 1.5;
+  }
+
+  to {
+    rotate: 360deg;
+  }
+}
+
+#blob {
+  background-color: white;
+  height: 34vmax;
+  aspect-ratio: 1;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: linear-gradient(to right, aquamarine, mediumpurple);
+  animation: rotate 20s infinite;
+  opacity: 0.8;
+}
+
+#blur {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 2;
+  backdrop-filter: blur(12vmax);
+}
 </style>
 
-
+<div id="blob"></div>
+<div id="blur"></div>
 <main>
 
 <Navbar/>
+
+
 
 <div class="container">
 

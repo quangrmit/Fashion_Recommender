@@ -14,8 +14,46 @@
     box-sizing: border-box;
     color:white;
 }
-main {
 
+
+@keyframes rotate {
+  from {
+    rotate: 0deg;
+  }
+
+  50% {
+    scale: 1 1.5;
+  }
+
+  to {
+    rotate: 360deg;
+  }
+}
+
+#blob {
+  background-color: white;
+  height: 34vmax;
+  aspect-ratio: 1;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: linear-gradient(to right, aquamarine, mediumpurple);
+  animation: rotate 20s infinite;
+  opacity: 0.8;
+}
+
+#blur {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 2;
+  backdrop-filter: blur(12vmax);
+}
+main {
+    position:absolute;
+    z-index:3;
     height: 100vh;
 }
 
@@ -36,7 +74,8 @@ color:  #45dfa2;
   display: grid;
   grid-template-columns: auto auto auto;
   place-items: center;
-  margin: 0 10vw 0 10vw;
+  width: 100vw;
+
 }
 
 
@@ -68,7 +107,8 @@ font-size: 20px;
 
 </style>
 
-
+<div id="blob"></div>
+<div id="blur"></div>
 <main>
 <Navbar/>
 
