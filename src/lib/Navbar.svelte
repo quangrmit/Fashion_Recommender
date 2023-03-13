@@ -6,7 +6,7 @@
     <div class="brand">What</div>
     <ul>
         <li><a href="#">Menu</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="./about.html">About</a></li>
         <li><a href="#">Team</a></li>
     </ul>
     <button class="open-btn">Open</button>
